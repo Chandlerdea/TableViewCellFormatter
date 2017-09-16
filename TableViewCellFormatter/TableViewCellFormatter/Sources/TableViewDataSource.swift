@@ -9,11 +9,34 @@
 import Foundation
 import UIKit
 
-public protocol TableViewDataSource: class {
+open class TableViewDataSource: NSObject {
     
-    var sections: [TableViewSection] { get }
+    public let sections: [TableViewSection]
     
-    func registerCells(with tableView: UITableView)
+    public init(sections: [TableViewSection]) {
+        self.sections = sections
+        super.init()
+    }
+    
+    open func registerCells(with tableView: UITableView) {
+        // Default implemetation
+    }
 }
-
+// MARK: - UITableViewDataSource
+extension TableViewDataSource: UITableViewDataSource {
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let currentSection: TableViewSection = self.sections[section]
+        return currentSection.rowCount
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentSection: TableViewSection = self.sections[indexPath.section]
+        return currentSection.cell(for: indexPath, in: tableView)
+    }
+}
 

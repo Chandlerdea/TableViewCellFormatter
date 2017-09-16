@@ -147,14 +147,16 @@ struct SecondSection: TableViewSection {
     }
 }
 
-final class DataSource: NSObject, UITableViewDataSource, TableViewDataSource {
+final class DataSource: TableViewDataSource {
     
-    var sections: [TableViewSection] = [
-        FirstSection(),
-        SecondSection()
-    ]
+    convenience init() {
+        self.init(sections: [
+            FirstSection(),
+            SecondSection()
+        ])
+    }
     
-    func registerCells(with tableView: UITableView) {
+    override func registerCells(with tableView: UITableView) {
         if let firstSection: FirstSection = self.sections.first as? FirstSection {
             firstSection.profileRow.registerCell(with: tableView)
         }
@@ -162,22 +164,8 @@ final class DataSource: NSObject, UITableViewDataSource, TableViewDataSource {
             secondSection.colorsRow.registerCell(with: tableView)
         }
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let currentSection: TableViewSection = self.sections[section]
-        return currentSection.rowCount
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentSection: TableViewSection = self.sections[indexPath.section]
-        return currentSection.cell(for: indexPath, in: tableView)
-    }
-    
 }
+
 
 let vc: TableViewController = TableViewController(style: .plain)
 PlaygroundPage.current.liveView = vc.view

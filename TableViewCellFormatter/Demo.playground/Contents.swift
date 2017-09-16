@@ -82,7 +82,7 @@ final class ChangeColorTableViewCell: UITableViewCell {
 
 final class TableViewController: UITableViewController {
     
-    private let dataSource: TableViewDataSource & UITableViewDataSource
+    private let dataSource: TableViewDataSource
     
     override init(style: UITableViewStyle) {
         self.dataSource = DataSource()

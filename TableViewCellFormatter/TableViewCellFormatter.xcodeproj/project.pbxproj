@@ -46,7 +46,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		360659E71F6DA61C002BC3D8 /* Source */ = {
+		360659E71F6DA61C002BC3D8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				360659F01F6DA67F002BC3D8 /* CollectionViewDataSource.swift */,
@@ -58,7 +58,7 @@
 				360659F31F6DA67F002BC3D8 /* TableViewSection.swift */,
 				360659F71F6DA67F002BC3D8 /* UIView+Helpers.swift */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		36065A001F6DA6B1002BC3D8 /* Frameworks */ = {
@@ -89,7 +89,7 @@
 		361220421F58F0DD00B832F1 /* TableViewCellFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				360659E71F6DA61C002BC3D8 /* Source */,
+				360659E71F6DA61C002BC3D8 /* Sources */,
 				361220431F58F0DD00B832F1 /* TableViewCellFormatter.h */,
 				361220441F58F0DD00B832F1 /* Info.plist */,
 			);

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol CollectionViewSection {
+public protocol CollectionViewSection {
     
     var rowCount: Int { get }
     

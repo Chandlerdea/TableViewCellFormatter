@@ -1,5 +1,5 @@
 //
-//  TableViewSection.swift
+//  TableViewDataSource.swift
 //  rip-harambe-workout-tracker
 //
 //  Created by Chandler De Angelis on 7/27/17.
@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 
-protocol TableViewSection {
+public protocol TableViewDataSource {
     
-    var rowCount: Int { get }
+    var sectionCount: Int { get }
+    
+    func rowCount(for section: Int) -> Int
     
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell
+    
 }
-

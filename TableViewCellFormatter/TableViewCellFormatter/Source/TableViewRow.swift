@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol TableViewRow {
+public protocol TableViewRow {
     
     associatedtype Cell
     
@@ -20,19 +20,19 @@ protocol TableViewRow {
     func configure(_ cell: Cell)
 }
 
-struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {
+public struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {
     
     private var _configure: (CellType) -> Void
     private var _indexPath: IndexPath
     private var _cellReuseIdentifier: String
     
-    init<R: TableViewRow>(row: R) where R.Cell == CellType {
+    public init<R: TableViewRow>(row: R) where R.Cell == CellType {
         self._configure = row.configure
         self._indexPath = row.indexPath
         self._cellReuseIdentifier = row.cellReuseIdentifier
     }
     
-    init(indexPath: IndexPath, configure: @escaping (CellType) -> Void) {
+    public init(indexPath: IndexPath, configure: @escaping (CellType) -> Void) {
         self._indexPath = indexPath
         self._configure = configure
         self._cellReuseIdentifier = CellType.reuseIdentifier
@@ -40,15 +40,15 @@ struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {
     
     // MARK: TableViewRow
     
-    var indexPath: IndexPath {
+    public var indexPath: IndexPath {
         return self._indexPath
     }
     
-    var cellReuseIdentifier: String {
+    public var cellReuseIdentifier: String {
         return self._cellReuseIdentifier
     }
     
-    func configure(_ cell: CellType) {
+    public func configure(_ cell: CellType) {
         self._configure(cell)
     }
 }

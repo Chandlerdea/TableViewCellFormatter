@@ -56,19 +56,19 @@ extension NSLayoutDimension {
 
 extension UIView {
     
-    static let separatorHeight: CGFloat = 0.5
+    public static let separatorHeight: CGFloat = 0.5
 
-    class public func autolayoutView<T: UIView>() -> T {
+    public class public func autolayoutView<T: UIView>() -> T {
         let result: T = T(frame: CGRect.zero)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }
 
-    func addSubviews(_ subviews: [UIView]) {
+    public func addSubviews(_ subviews: [UIView]) {
         subviews.forEach(self.addSubview(_:))
     }
     
-    func activateAllSideAnchors(relativeToMargins: Bool! = false, padding: UIEdgeInsets! = nil, priorities: UIEdgeInsets! = nil) {
+    public func activateAllSideAnchors(relativeToMargins: Bool! = false, padding: UIEdgeInsets! = nil, priorities: UIEdgeInsets! = nil) {
         guard let superview = self.superview else {
             fatalError("Must have a superview")
         }
@@ -92,7 +92,7 @@ extension UIView {
         NSLayoutConstraint.activate([leftConstraint, rightConstraint, topConstraint, bottomConstraint])
     }
     
-    @discardableResult func addSeparator(inset: CGFloat, yOrigin: CGFloat? = nil, height: CGFloat? = nil, color: UIColor? = nil) -> CALayer {
+    @discardableResult public func addSeparator(inset: CGFloat, yOrigin: CGFloat? = nil, height: CGFloat? = nil, color: UIColor? = nil) -> CALayer {
         let finalOrigin: CGPoint
         let finalSize: CGSize
         
@@ -126,7 +126,7 @@ extension UIView {
      Resigns the first responder of a view withing the heirarchy of a given view
      - returns:              The view that was the first responder
      */
-    @discardableResult func resignSubviewFirstResponder() -> UIView? {
+    @discardableResult public func resignSubviewFirstResponder() -> UIView? {
         /**
          Resigns the first responder and stops if resigned
          - parameter view:           The view to check as first responder
@@ -156,8 +156,8 @@ extension UIView {
 
 extension UILayoutPriority {
     
-    static var almostRequired: UILayoutPriority {
-        return UILayoutPriority(rawValue: 999)
+    public static var almostRequired: UILayoutPriority {
+        return self.init(999)
     }
 }
 

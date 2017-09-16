@@ -1,7 +1,6 @@
-//: Playground - noun: a place where people can play
-
 import UIKit
 import PlaygroundSupport
+import TableViewCellFormatter
 
 final class UserTableViewCell: UITableViewCell {
     
@@ -67,15 +66,15 @@ final class ChangeColorTableViewCell: UITableViewCell {
         }
     }
     
-    func changeRed(_ sender: UIButton) {
+    @objc func changeRed(_ sender: UIButton) {
         self.contentView.backgroundColor = .red
     }
     
-    func changeGreen(_ sender: UIButton) {
+    @objc func changeGreen(_ sender: UIButton) {
         self.contentView.backgroundColor = .green
     }
     
-    func changeBlue(_ sender: UIButton) {
+    @objc func changeBlue(_ sender: UIButton) {
         self.contentView.backgroundColor = .blue
     }
 }
@@ -83,7 +82,7 @@ final class ChangeColorTableViewCell: UITableViewCell {
 
 final class TableViewController: UITableViewController {
     
-    private var dataSource: TableViewDataSource
+    private let dataSource: TableViewDataSource & UITableViewDataSource
     
     override init(style: UITableViewStyle) {
         self.dataSource = DataSource()
@@ -98,27 +97,16 @@ final class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.dataSource.registerCells(with: self.tableView)
+        self.tableView.dataSource = self.dataSource
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         self.tableView.tableFooterView = UIView()
     }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.dataSource.sectionCount
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.rowCount(for: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.dataSource.cell(for: indexPath, in: tableView)
-    }
 }
 
-struct DataSource: TableViewDataSource {
+struct FirstSection: TableViewSection {
     
-    private let profileRow: AnyTableViewRow<UserTableViewCell> = {
+    let profileRow: AnyTableViewRow<UserTableViewCell> = {
         let path: IndexPath = IndexPath(row: 0, section: 0)
         return AnyTableViewRow(indexPath: path, configure: { (cell: UserTableViewCell) -> Void in
             cell.textLabel?.text = "Chandler De Angelis"
@@ -126,42 +114,67 @@ struct DataSource: TableViewDataSource {
         })
     }()
     
-    private let colorsRow: AnyTableViewRow<ChangeColorTableViewCell> = {
-        let path: IndexPath = IndexPath(row: 1, section: 0)
-        return AnyTableViewRow(indexPath: path, configure: .none)
-    }()
-    
-    func registerCells(with tableView: UITableView) {
-        self.profileRow.registerCell(with: tableView)
-        self.colorsRow.registerCell(with: tableView)
-    }
-    
-    var sectionCount: Int {
+    var rowCount: Int {
         return 1
     }
     
-    func rowCount(for section: Int) -> Int {
-        return 2
+    func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: self.profileRow.cellReuseIdentifier, for: self.profileRow.indexPath)
+        if let profileCell: UserTableViewCell = cell as? UserTableViewCell {
+            self.profileRow.configure(profileCell)
+        }
+        return cell
+    }
+}
+
+struct SecondSection: TableViewSection {
+    
+    let colorsRow: AnyTableViewRow<ChangeColorTableViewCell> = {
+        let path: IndexPath = IndexPath(row: 1, section: 0)
+        return AnyTableViewRow(indexPath: path)
+    }()
+    
+    var rowCount: Int {
+        return 1
     }
     
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-        let reuseIdentifier: String
-        switch indexPath {
-        case self.profileRow.indexPath:
-            reuseIdentifier = self.profileRow.cellReuseIdentifier
-        case self.colorsRow.indexPath:
-            reuseIdentifier = self.colorsRow.cellReuseIdentifier
-        default:
-            fatalError("No row for index path")
-        }
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        switch cell {
-        case let cell as UserTableViewCell:
-            self.profileRow.configure(cell)
-        default:
-            break
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: self.colorsRow.cellReuseIdentifier, for: self.colorsRow.indexPath)
+        if let colorsCell: ChangeColorTableViewCell = cell as? ChangeColorTableViewCell {
+            self.colorsRow.configure(colorsCell)
         }
         return cell
+    }
+}
+
+final class DataSource: NSObject, UITableViewDataSource, TableViewDataSource {
+    
+    var sections: [TableViewSection] = [
+        FirstSection(),
+        SecondSection()
+    ]
+    
+    func registerCells(with tableView: UITableView) {
+        if let firstSection: FirstSection = self.sections.first as? FirstSection {
+            firstSection.profileRow.registerCell(with: tableView)
+        }
+        if let secondSection: SecondSection = self.sections.last as? SecondSection {
+            secondSection.colorsRow.registerCell(with: tableView)
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let currentSection: TableViewSection = self.sections[section]
+        return currentSection.rowCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentSection: TableViewSection = self.sections[indexPath.section]
+        return currentSection.cell(for: indexPath, in: tableView)
     }
     
 }

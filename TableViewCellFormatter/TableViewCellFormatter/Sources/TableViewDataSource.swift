@@ -9,12 +9,11 @@
 import Foundation
 import UIKit
 
-public protocol TableViewDataSource {
+public protocol TableViewDataSource: class {
     
-    var sectionCount: Int { get }
+    var sections: [TableViewSection] { get }
     
-    func rowCount(for section: Int) -> Int
-    
-    func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell
-    
+    func registerCells(with tableView: UITableView)
 }
+
+

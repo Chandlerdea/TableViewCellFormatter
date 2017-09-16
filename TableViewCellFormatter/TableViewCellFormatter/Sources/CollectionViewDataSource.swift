@@ -9,12 +9,25 @@
 import Foundation
 import UIKit
 
-public protocol CollectionViewDataSource {
+public protocol CollectionViewDataSource: class {
     
-    var sectionCount: Int { get }
+    var sections: [CollectionViewSection] { get }
     
-    func rowCount(for section: Int) -> Int
+}
+
+extension CollectionViewDataSource where Self: UICollectionViewDataSource {
     
-    func cell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return self.sections.count
+    }
     
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let currentSection: CollectionViewSection = self.sections[section]
+        return currentSection.rowCount
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let currentSection: CollectionViewSection = self.sections[indexPath.section]
+        return currentSection.cell(for: indexPath, in: collectionView)
+    }
 }

@@ -18,6 +18,15 @@ public protocol TableViewRow {
     var cellReuseIdentifier: String { get }
     
     func configure(_ cell: Cell)
+    
+    func registerCell(with tableView: UITableView)
+}
+
+extension TableViewRow {
+    
+    public func registerCell(with tableView: UITableView) {
+        tableView.register(Cell.self as? AnyClass, forCellReuseIdentifier: self.cellReuseIdentifier)
+    }
 }
 
 public struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {
@@ -32,9 +41,13 @@ public struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {
         self._cellReuseIdentifier = row.cellReuseIdentifier
     }
     
-    public init(indexPath: IndexPath, configure: @escaping (CellType) -> Void) {
+    public init(indexPath: IndexPath, configure: ((CellType) -> Void)? = nil) {
         self._indexPath = indexPath
-        self._configure = configure
+        if let unwrappedConfigure: (CellType) -> Void = configure {
+            self._configure = unwrappedConfigure
+        } else {
+            self._configure = { _ in }
+        }
         self._cellReuseIdentifier = CellType.reuseIdentifier
     }
     

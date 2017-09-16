@@ -58,7 +58,7 @@ extension UIView {
     
     public static let separatorHeight: CGFloat = 0.5
 
-    public class public func autolayoutView<T: UIView>() -> T {
+    public class func autolayoutView<T: UIView>() -> T {
         let result: T = T(frame: CGRect.zero)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result

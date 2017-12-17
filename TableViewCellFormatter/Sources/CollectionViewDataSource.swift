@@ -9,13 +9,21 @@
 import Foundation
 import UIKit
 
-public protocol CollectionViewDataSource: class {
+open class CollectionViewDataSource: NSObject {
     
-    var sections: [CollectionViewSection] { get }
+    public let sections: [CollectionViewSection]
     
+    public init(sections: [CollectionViewSection]) {
+        self.sections = sections
+        super.init()
+    }
+    
+    open func registerCells(with collectionView: UICollectionView) {
+        // Default impl
+    }
 }
-
-extension CollectionViewDataSource where Self: UICollectionViewDataSource {
+// MARK: - UICollectionViewDataSource
+extension CollectionViewDataSource: UICollectionViewDataSource {
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.sections.count
@@ -31,3 +39,6 @@ extension CollectionViewDataSource where Self: UICollectionViewDataSource {
         return currentSection.cell(for: indexPath, in: collectionView)
     }
 }
+
+
+

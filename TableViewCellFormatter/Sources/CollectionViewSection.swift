@@ -14,4 +14,20 @@ public protocol CollectionViewSection {
     var rowCount: Int { get }
     
     func cell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell
+    
+    
+    func willDisplay(cell: UICollectionViewCell, at indexPath: IndexPath)
+    
+    func didEndDisplaying(cell: UICollectionViewCell, at indexPath: IndexPath)
+}
+
+extension CollectionViewSection {
+    
+    public func willDisplay(cell: UICollectionViewCell, at indexPath: IndexPath) {
+        
+    }
+    
+    public func didEndDisplaying(cell: UICollectionViewCell, at indexPath: IndexPath) {
+        
+    }
 }

@@ -11,7 +11,7 @@ import UIKit
 
 open class TableViewDataSource: NSObject {
     
-    public let sections: [TableViewSection]
+    open var sections: [TableViewSection]
     
     public init(sections: [TableViewSection]) {
         self.sections = sections
@@ -34,7 +34,7 @@ extension TableViewDataSource: UITableViewDataSource {
         return currentSection.rowCount
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currentSection: TableViewSection = self.sections[indexPath.section]
         return currentSection.cell(for: indexPath, in: tableView)
     }

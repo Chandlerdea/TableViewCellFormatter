@@ -11,7 +11,7 @@ import UIKit
 
 open class CollectionViewDataSource: NSObject {
     
-    public let sections: [CollectionViewSection]
+    open var sections: [CollectionViewSection]
     
     public init(sections: [CollectionViewSection]) {
         self.sections = sections
@@ -34,7 +34,7 @@ extension CollectionViewDataSource: UICollectionViewDataSource {
         return currentSection.rowCount
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currentSection: CollectionViewSection = self.sections[indexPath.section]
         return currentSection.cell(for: indexPath, in: collectionView)
     }

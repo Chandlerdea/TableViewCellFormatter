@@ -14,7 +14,6 @@
 		360659FC1F6DA6AA002BC3D8 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360659F21F6DA67F002BC3D8 /* TableViewDataSource.swift */; };
 		360659FD1F6DA6AA002BC3D8 /* TableViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360659F61F6DA67F002BC3D8 /* TableViewRow.swift */; };
 		360659FE1F6DA6AA002BC3D8 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360659F31F6DA67F002BC3D8 /* TableViewSection.swift */; };
-		360659FF1F6DA6AA002BC3D8 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360659F71F6DA67F002BC3D8 /* UIView+Helpers.swift */; };
 		36065A021F6DA6B1002BC3D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36065A011F6DA6B1002BC3D8 /* UIKit.framework */; };
 		36065A051F6DB4EB002BC3D8 /* TableViewCellFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36065A041F6DB4EB002BC3D8 /* TableViewCellFormatter.swift */; };
 		361220451F58F0DD00B832F1 /* TableViewCellFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 361220431F58F0DD00B832F1 /* TableViewCellFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,7 +27,6 @@
 		360659F41F6DA67F002BC3D8 /* ReusableViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewType.swift; sourceTree = "<group>"; };
 		360659F51F6DA67F002BC3D8 /* CollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSection.swift; sourceTree = "<group>"; };
 		360659F61F6DA67F002BC3D8 /* TableViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRow.swift; sourceTree = "<group>"; };
-		360659F71F6DA67F002BC3D8 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		36065A011F6DA6B1002BC3D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		36065A031F6DB4A1002BC3D8 /* Demo.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Demo.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		36065A041F6DB4EB002BC3D8 /* TableViewCellFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellFormatter.swift; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 				360659F21F6DA67F002BC3D8 /* TableViewDataSource.swift */,
 				360659F61F6DA67F002BC3D8 /* TableViewRow.swift */,
 				360659F31F6DA67F002BC3D8 /* TableViewSection.swift */,
-				360659F71F6DA67F002BC3D8 /* UIView+Helpers.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -189,7 +186,6 @@
 				360659FD1F6DA6AA002BC3D8 /* TableViewRow.swift in Sources */,
 				360659FE1F6DA6AA002BC3D8 /* TableViewSection.swift in Sources */,
 				36065A051F6DB4EB002BC3D8 /* TableViewCellFormatter.swift in Sources */,
-				360659FF1F6DA6AA002BC3D8 /* UIView+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

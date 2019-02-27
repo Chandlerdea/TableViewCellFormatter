@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol CollectionViewRow {
+public protocol CollectionViewRow where Cell: UICollectionViewCell {
     
     associatedtype Cell
     

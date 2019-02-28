@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol TableViewRow {
+public protocol TableViewRow where Cell: UITableViewCell {
     
     associatedtype Cell
     
@@ -24,9 +24,14 @@ public protocol TableViewRow {
 
 extension TableViewRow {
     
-    public func registerCell(with tableView: UITableView) {
-        tableView.register(Cell.self as? AnyClass, forCellReuseIdentifier: self.cellReuseIdentifier)
+    public var cellReuseIdentifier: String {
+        return Cell.reuseIdentifier
     }
+    
+    public func registerCell(with tableView: UITableView) {
+        tableView.register(Cell.self as AnyClass, forCellReuseIdentifier: self.cellReuseIdentifier)
+    }
+    
 }
 
 public struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {

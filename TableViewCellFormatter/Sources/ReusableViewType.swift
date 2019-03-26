@@ -14,8 +14,8 @@ protocol ReusableViewType {
 extension ReusableViewType where Self: NSObject {
     static var reuseIdentifier: String {
         let typeString: String = String(describing: self)
-        if let decimalIndex: String.Index = typeString.index(of: ".") {
-            return typeString.substring(to: decimalIndex)
+        if let decimalIndex: String.Index = typeString.firstIndex(of: ".") {
+            return String(typeString[..<decimalIndex])
         } else {
             return typeString
         }

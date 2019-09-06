@@ -10,17 +10,20 @@ Add this line you your `Cartfile`
 ### Swift Package Manager
 In your `Packages.swift` file, add this code
 
+```swift
     import PackageDescription
     
     let package = Package(
         url: "https://github.com/Chandlerdea/TableViewCellFormatter/TableViewCellFormatter.swift"
         majorVersion: 1
     )
-    
+```
+
 ## Use 
 The basic structure of the program is simple.
 First, you have the `TableViewDataSource` class, which looks like this:
 
+```swift
     open class TableViewDataSource: NSObject {
     
         public let sections: [TableViewSection]
@@ -51,9 +54,11 @@ First, you have the `TableViewDataSource` class, which looks like this:
             return currentSection.cell(for: indexPath, in: tableView)
         }
     }
-    
+```   
+
 This class acts as the data source for a table view. To use this class, you need to either sublass it, or pass an array of objects that conform to `TableViewSection`. A `TableViewSection` determines how many rows are in the section, and dequeues cell from the table view. The interface looks like this:
 
+```swift
     public protocol TableViewSection {
     
         var rowCount: Int { get }
@@ -73,9 +78,11 @@ You also have the `TableViewRow` protocol, which looks like this:
     
         func configure(_ cell: Cell)
     }
+```
 
 This protocol has all information needed to dequeue and configure a cell. Since the protocol has an associated type, that means you cannot have a property of this type. To get around the issue, there is a `AnyTableViewRow` struct, which looks like this:
 
+```swift
     public struct AnyTableViewRow<CellType: UITableViewCell>: TableViewRow {
     
         private var _configure: (CellType) -> Void
@@ -108,7 +115,8 @@ This protocol has all information needed to dequeue and configure a cell. Since 
             self._configure(cell)
         }
     }
-    
+```
+
 This type allows you to essentially remove the associated type requirement for the `TableViewRow` protocol, and reference it as a property.
 
 Usually I have structs that conform to `TableViewSection`, each with references to instances of `AnyTableViewRow<SomeCellClass>`. In the implementation of `cell(for:, in:)`, the cell is dequeued, and the row for the index path configures the cell. Once you have those, you can sublass `TableViewDataSource`, and add a convenience initialzer that passes those sections. Checkout the playground for an expample of this.

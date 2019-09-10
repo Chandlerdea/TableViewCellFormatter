@@ -136,12 +136,12 @@
 		361220371F58F0DD00B832F1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Chandler De Angelis";
 				TargetAttributes = {
 					3612203F1F58F0DD00B832F1 = {
 						CreatedOnToolsVersion = 8.3.3;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Manual;
 					};
 				};

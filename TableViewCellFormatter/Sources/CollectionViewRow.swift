@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-public protocol CollectionViewRow where Cell: UICollectionViewCell {
+public protocol CollectionViewRow {
     
     associatedtype Cell
     
-    var indexPath: IndexPath { get set }
+    var indexPath: IndexPath { get }
     
     var cellReuseIdentifier: String { get }
     
@@ -23,10 +23,6 @@ public protocol CollectionViewRow where Cell: UICollectionViewCell {
 }
 
 extension CollectionViewRow {
-    
-    public var cellReuseIdentifier: String {
-        return Cell.reuseIdentifier
-    }
     
     public func willDisplay(_ cell: Cell) {
         
@@ -76,12 +72,7 @@ public struct AnyCollectionViewRow<CellType: UICollectionViewCell>: CollectionVi
     // MARK: TableViewRow
     
     public var indexPath: IndexPath {
-        get {
-            return self._indexPath
-        }
-        set {
-            self._indexPath = newValue
-        }
+        return self._indexPath
     }
     
     public var cellReuseIdentifier: String {

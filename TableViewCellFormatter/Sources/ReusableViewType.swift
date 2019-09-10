@@ -15,7 +15,7 @@ extension ReusableViewType where Self: NSObject {
     static var reuseIdentifier: String {
         let typeString: String = String(describing: self)
         if let decimalIndex: String.Index = typeString.firstIndex(of: ".") {
-            return String(typeString[..<decimalIndex])
+            return typeString.substring(to: decimalIndex)
         } else {
             return typeString
         }

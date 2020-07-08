@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol CollectionViewRow {
+public protocol CollectionViewRow where Cell: UICollectionViewCell {
     
     associatedtype Cell
     
@@ -31,6 +31,8 @@ extension CollectionViewRow {
     public func didEndDisplaying(_ cell: Cell) {
         
     }
+
+    public var cellReuseIdentifier: String { Cell.reuseIdentifier }
 }
 
 public struct AnyCollectionViewRow<CellType: UICollectionViewCell>: CollectionViewRow {
